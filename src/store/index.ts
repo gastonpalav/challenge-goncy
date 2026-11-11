@@ -1,6 +1,7 @@
 import { seedSession } from '@/sobrino/seed';
 import type { Session } from '@/sobrino/types';
 import { MemoryStore } from './memory';
+import { redisEnv, RedisStore } from './redis';
 
 export interface Store {
   getSession(key: string): Promise<Session | null>;
@@ -15,9 +16,15 @@ export const REAL = 'real';
 
 const globalForStore = globalThis as unknown as { __store?: Store };
 
-/** Un único Store por proceso (en desarrollo, el módulo se recarga pero la memoria no). */
+/**
+ * Un único Store por proceso. Con las variables de Upstash usa Redis; sin ellas, memoria
+ * (desarrollo y tests). En desarrollo el módulo se recarga, pero la memoria se conserva.
+ */
 export function getStore(): Store {
-  globalForStore.__store ??= new MemoryStore();
+  if (!globalForStore.__store) {
+    const env = redisEnv();
+    globalForStore.__store = env ? new RedisStore(env) : new MemoryStore();
+  }
   return globalForStore.__store;
 }
 
