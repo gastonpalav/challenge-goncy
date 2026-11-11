@@ -17,6 +17,7 @@ export function Simulador({ initial }: { initial: SimState }) {
   const [items, setItems] = useState<ChatItem[]>(greeting);
   const [busy, setBusy] = useState(false);
   const [tab, setTab] = useState<Tab>('chat');
+  const [draft, setDraft] = useState('');
   const [pageChanged, setPageChanged] = useState(false);
 
   // El estado tarda un render en llegar; esta referencia frena el doble toque en el acto.
@@ -82,6 +83,14 @@ export function Simulador({ initial }: { initial: SimState }) {
 
   const sendButton = async (label: string) => {
     addReplies(await post('/api/sim/message', { kind: 'button', label }, [item({ from: 'norma', text: label })]));
+  };
+
+  const sendText = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const text = draft.trim();
+    if (!text || sending.current) return;
+    setDraft('');
+    addReplies(await post('/api/sim/message', { kind: 'text', text }, [item({ from: 'norma', text })]));
   };
 
   const reset = async () => {
@@ -157,6 +166,22 @@ export function Simulador({ initial }: { initial: SimState }) {
               ))}
             </ul>
           </div>
+
+          <form className="sim-escribir" onSubmit={sendText}>
+            <input
+              type="text"
+              aria-label="Escribile a Goncy"
+              placeholder="O escribile como le escribiría Norma"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              maxLength={300}
+              autoComplete="off"
+              enterKeyHint="send"
+            />
+            <button type="submit" disabled={busy || draft.trim() === ''}>
+              Enviar
+            </button>
+          </form>
         </section>
 
         <section className="sim-pagina" aria-label="Tu copia de prueba de la página">
