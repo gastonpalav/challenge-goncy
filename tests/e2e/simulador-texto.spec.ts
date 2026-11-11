@@ -80,3 +80,27 @@ test('con el cupo agotado avisa, y los audios grabados siguen andando', async ({
   await page.getByRole('button', { name: /azucarera/i }).click();
   await expect(copia(page).getByText('$ 18.000')).toBeVisible();
 });
+
+test('mandar una foto de muestra y después decir nombre y precio la publica', async ({ page }) => {
+  await page.getByRole('button', { name: 'Mandar una foto' }).click();
+  await page.getByRole('button', { name: /foto de muestra 1/i }).click();
+  await expect(chat(page).getByText(/cómo se llama y cuánto sale/i)).toBeVisible();
+  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+
+  await escribir(page, 'yerbera, 30000');
+  await expect(chat(page).getByText(/ya está en la página/i)).toBeVisible();
+  await expect(copia(page).getByRole('heading', { name: 'Yerbera' })).toBeVisible();
+  await expect(copia(page).getByText('$ 30.000')).toBeVisible();
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
+});
+
+test('mandar una foto y decir que es la nueva de una pieza la reemplaza', async ({ page }) => {
+  const foto = copia(page).getByRole('listitem').filter({ hasText: 'Florero' }).locator('img');
+  const antes = await foto.getAttribute('src');
+  await page.getByRole('button', { name: 'Mandar una foto' }).click();
+  await page.getByRole('button', { name: /foto de muestra 2/i }).click();
+  await escribir(page, 'es la foto nueva del florero');
+  await expect(chat(page).getByText(/cambié la foto/i)).toBeVisible();
+  await expect(foto).not.toHaveAttribute('src', antes!);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+});

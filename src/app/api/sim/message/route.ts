@@ -6,6 +6,7 @@ import { handle } from '@/sobrino/handle';
 import { interpret } from '@/sobrino/interpret';
 import { fakeAsker } from '@/sobrino/interpret.fake';
 import * as say from '@/sobrino/phrases';
+import { SAMPLE_PHOTOS } from '@/sobrino/samples';
 import type { Message, Reply, Session } from '@/sobrino/types';
 import { getStore, loadOrSeed } from '@/store';
 
@@ -15,7 +16,8 @@ const E2E = process.env.E2E === '1';
 type Body =
   | { kind: 'canned'; id: string }
   | { kind: 'button'; label: string }
-  | { kind: 'text'; text: string };
+  | { kind: 'text'; text: string }
+  | { kind: 'samplePhoto'; image: string };
 
 type Result = { session: Session; replies: Reply[] };
 
@@ -25,6 +27,11 @@ function parse(raw: unknown): Body | null {
   if (body.kind === 'canned' && typeof body.id === 'string') return { kind: 'canned', id: body.id };
   if (body.kind === 'button' && typeof body.label === 'string') {
     return { kind: 'button', label: body.label.slice(0, 40) };
+  }
+  if (body.kind === 'samplePhoto') {
+    // Solo se aceptan las fotos de la lista: el visitante no puede colar otra dirección.
+    const sample = SAMPLE_PHOTOS.find((s) => s.id === body.id);
+    return sample ? { kind: 'samplePhoto', image: sample.image } : null;
   }
   if (body.kind === 'text' && typeof body.text === 'string') {
     const text = body.text.trim().slice(0, MAX_TEXT);
@@ -80,6 +87,8 @@ export async function POST(request: Request) {
     result = canned ? playCanned(session, canned, now) : { session, replies: [{ text: say.notUnderstood() }] };
   } else if (body.kind === 'button') {
     result = handle(session, { kind: 'button', label: body.label }, now);
+  } else if (body.kind === 'samplePhoto') {
+    result = handle(session, { kind: 'photo', image: body.image }, now);
   } else {
     result = await onText(session, body.text, visitor, now);
   }

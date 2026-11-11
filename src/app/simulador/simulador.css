@@ -310,6 +310,45 @@
   border-color: #9aa8a2;
 }
 
+.sim-escribir .sim-foto-boton {
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--verde);
+  font-size: 0.9rem;
+  line-height: 1.1;
+  max-width: 5.5em;
+}
+
+.sim-bandeja {
+  flex: none;
+  padding: 10px 12px;
+  background: #f6f1e8;
+  border-top: 1px solid #cfc5b4;
+  font-size: 0.9rem;
+}
+
+.sim-bandeja ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.sim-bandeja button {
+  padding: 0;
+  background: none;
+  border: 2px solid var(--verde);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sim-bandeja img {
+  width: 72px;
+  height: 90px;
+  object-fit: cover;
+}
+
 /* ---------- La copia de la página ---------- */
 
 .sim-pagina {

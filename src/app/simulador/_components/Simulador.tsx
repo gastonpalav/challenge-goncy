@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Chip, SimResponse, SimState } from '@/sim/server';
 import * as say from '@/sobrino/phrases';
+import { SAMPLE_PHOTOS } from '@/sobrino/samples';
 import { Storefront } from '../../_components/Storefront';
 import { Bubble, type ChatItem } from './Bubble';
 
@@ -18,6 +19,7 @@ export function Simulador({ initial }: { initial: SimState }) {
   const [busy, setBusy] = useState(false);
   const [tab, setTab] = useState<Tab>('chat');
   const [draft, setDraft] = useState('');
+  const [trayOpen, setTrayOpen] = useState(false);
   const [pageChanged, setPageChanged] = useState(false);
 
   // El estado tarda un render en llegar; esta referencia frena el doble toque en el acto.
@@ -91,6 +93,15 @@ export function Simulador({ initial }: { initial: SimState }) {
     if (!text || sending.current) return;
     setDraft('');
     addReplies(await post('/api/sim/message', { kind: 'text', text }, [item({ from: 'norma', text })]));
+  };
+
+  const sendSample = async (sample: (typeof SAMPLE_PHOTOS)[number]) => {
+    setTrayOpen(false);
+    addReplies(
+      await post('/api/sim/message', { kind: 'samplePhoto', id: sample.id }, [
+        item({ from: 'norma', image: sample.image }),
+      ]),
+    );
   };
 
   const reset = async () => {
@@ -167,7 +178,31 @@ export function Simulador({ initial }: { initial: SimState }) {
             </ul>
           </div>
 
+          {trayOpen ? (
+            <div className="sim-bandeja">
+              <p>Elegí una foto para mandarle:</p>
+              <ul>
+                {SAMPLE_PHOTOS.map((sample, i) => (
+                  <li key={sample.id}>
+                    <button type="button" onClick={() => sendSample(sample)} disabled={busy}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={sample.image} alt={`Foto de muestra ${i + 1}`} width={72} height={90} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <form className="sim-escribir" onSubmit={sendText}>
+            <button
+              type="button"
+              className="sim-foto-boton"
+              aria-expanded={trayOpen}
+              onClick={() => setTrayOpen((open) => !open)}
+            >
+              Mandar una foto
+            </button>
             <input
               type="text"
               aria-label="Escribile a Goncy"

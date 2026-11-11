@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // El indicador de desarrollo tapa la esquina inferior izquierda del chat.
+  devIndicators: false,
 };
 
 export default nextConfig;
