@@ -11,7 +11,7 @@ export function PieceCard({ piece, priority }: { piece: Piece; priority: boolean
           alt=""
           width={960}
           height={1200}
-          sizes="(min-width: 960px) 300px, (min-width: 600px) 46vw, 92vw"
+          sizes="(min-width: 960px) 340px, (min-width: 600px) 46vw, 92vw"
           priority={priority}
         />
         <PriceTag price={piece.price} />

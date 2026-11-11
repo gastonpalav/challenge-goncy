@@ -8,7 +8,10 @@ import { formatPrice } from './money';
 export const YES = 'Sí';
 export const NO = 'No';
 
-export const published = (title: string, price: number) =>
+export const hello = () => 'Hola, tía. Mandame la foto de una pieza nueva, o contame qué vendiste.';
+export const connectionLost = () => 'Se me cortó la señal, tía. Probá de nuevo en un ratito.';
+
+export const published =(title: string, price: number) =>
   `Listo tía, ya está en la página: ${title}, ${formatPrice(price)}.`;
 
 export const askNameAndPrice = () => 'Qué linda, tía. ¿Cómo se llama y cuánto sale?';
