@@ -153,15 +153,11 @@
 
 .con-avatar {
   flex: none;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
+  padding: 2px;
   border-radius: 50%;
-  background: #f3ead9;
-  color: var(--verde);
-  font-weight: 700;
-  font-size: 1.4rem;
+  background: var(--porcelana);
 }
 
 .con-nombre {

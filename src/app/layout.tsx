@@ -25,9 +25,19 @@ const mano = Caveat({
   variable: "--letra-mano",
 });
 
+const REFRAN = "Lo que se hace con las manos no sale dos veces igual.";
+
 export const metadata: Metadata = {
   title: "La manito de Norma",
-  description: "Piezas de cerámica hechas a mano en el taller de Norma.",
+  description: REFRAN,
+  // Lo que se ve al pegar el enlace en WhatsApp o en X.
+  openGraph: {
+    title: "La manito de Norma",
+    description: REFRAN,
+    siteName: "La manito de Norma",
+    locale: "es_AR",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#fbfcfe" };

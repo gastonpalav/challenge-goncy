@@ -77,6 +77,18 @@ img {
   text-wrap: balance;
 }
 
+/* Normita, la figurita de porcelana, se asoma al lado del cartel. */
+.puesto-titulo {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 4cqi, 40px);
+}
+
+.puesto-normita {
+  flex: none;
+  width: clamp(84px, 24cqi, 150px);
+}
+
 .puesto-cabecera p {
   margin-top: 14px;
   max-width: 17em;

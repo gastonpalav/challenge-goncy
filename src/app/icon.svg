@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="12 0 96 96">
+  <!-- La cara de Normita: para la foto de perfil del chat y el ícono de la pestaña. -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- Zapatos -->
+    <ellipse cx="47" cy="138" rx="10.5" ry="5" fill="#14306f"/>
+    <ellipse cx="73" cy="138" rx="10.5" ry="5" fill="#14306f"/>
+    <!-- Vestido -->
+    <path d="M42 90 Q60 84 78 90 L94 130 Q60 141 26 130Z" fill="#1f48a3" stroke="#14306f" stroke-width="2.4"/>
+    <path d="M29 126 Q60 136 91 126" fill="none" stroke="#a9c0ea" stroke-width="2.4" stroke-dasharray="0.1 6"/>
+    <!-- Chal tejido -->
+    <path d="M60 92 L38 89 Q22 100 17 118 L43 113 L60 100 L77 113 L103 118 Q98 100 82 89Z" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <g fill="#a9c0ea">
+      <circle cx="34" cy="100" r="2"/><circle cx="43" cy="97" r="2"/><circle cx="28" cy="109" r="2"/>
+      <circle cx="38" cy="107" r="2"/><circle cx="48" cy="104" r="2"/>
+      <circle cx="86" cy="100" r="2"/><circle cx="77" cy="97" r="2"/><circle cx="92" cy="109" r="2"/>
+      <circle cx="82" cy="107" r="2"/><circle cx="72" cy="104" r="2"/>
+    </g>
+    <path d="M20 118v6M27 117v6M34 115v6M41 114v6M79 114v6M86 115v6M93 117v6M100 118v6" fill="none" stroke="#1f48a3" stroke-width="2"/>
+    <!-- Tacita -->
+    <path d="M49 105 H71 L69 124 Q60 128 51 124Z" fill="#fff" stroke="#14306f" stroke-width="2.4"/>
+    <ellipse cx="60" cy="105" rx="11" ry="3" fill="#a9c0ea" stroke="#14306f" stroke-width="2"/>
+    <g fill="#1f48a3">
+      <circle cx="60" cy="113" r="1.7"/><circle cx="63.2" cy="115.3" r="1.7"/><circle cx="62" cy="119" r="1.7"/>
+      <circle cx="58" cy="119" r="1.7"/><circle cx="56.8" cy="115.3" r="1.7"/>
+    </g>
+    <!-- Manos -->
+    <circle cx="47" cy="116" r="6.5" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <circle cx="73" cy="116" r="6.5" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <!-- Rodete -->
+    <circle cx="60" cy="16" r="13" fill="#a9c0ea" stroke="#1f48a3" stroke-width="2.4"/>
+    <path d="M52 10 Q60 6 68 10M50 17 Q60 13 70 17" fill="none" stroke="#1f48a3" stroke-width="1.6"/>
+    <!-- Orejas y cara -->
+    <circle cx="25" cy="62" r="6" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <circle cx="95" cy="62" r="6" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <ellipse cx="60" cy="58" rx="35" ry="32" fill="#fff" stroke="#1f48a3" stroke-width="2.4"/>
+    <!-- Pelo con raya al medio -->
+    <path d="M25 60 C19 30 44 24 60 24 C76 24 101 30 95 60 C91 47 78 39 60 37 C42 39 29 47 25 60Z" fill="#a9c0ea" stroke="#1f48a3" stroke-width="2.4"/>
+    <path d="M60 24 V37M46 27 Q40 34 33 44M74 27 Q80 34 87 44" fill="none" stroke="#1f48a3" stroke-width="1.6"/>
+    <!-- Cachetes -->
+    <circle cx="36" cy="75" r="5.5" fill="#a9c0ea" opacity="0.75"/>
+    <circle cx="84" cy="75" r="5.5" fill="#a9c0ea" opacity="0.75"/>
+    <!-- Ojos -->
+    <circle cx="46" cy="65" r="4.6" fill="#14306f"/>
+    <circle cx="74" cy="65" r="4.6" fill="#14306f"/>
+    <circle cx="47.6" cy="63.4" r="1.5" fill="#fff"/>
+    <circle cx="75.6" cy="63.4" r="1.5" fill="#fff"/>
+    <path d="M40 51 Q46 48 52 51M68 51 Q74 48 80 51" fill="none" stroke="#1f48a3" stroke-width="1.8"/>
+    <!-- Anteojos -->
+    <g fill="none" stroke="#14306f" stroke-width="2">
+      <circle cx="46" cy="65" r="10.5"/>
+      <circle cx="74" cy="65" r="10.5"/>
+      <path d="M56.5 64 Q60 61 63.5 64M35.5 64 L27 61M84.5 64 L93 61"/>
+    </g>
+    <!-- Sonrisa -->
+    <path d="M54 79 Q60 85 66 79" fill="none" stroke="#14306f" stroke-width="2.2"/>
+  </g>
+</svg>

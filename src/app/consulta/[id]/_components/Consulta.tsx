@@ -117,9 +117,8 @@ export function Consulta({ piece }: { piece: Piece }) {
         <Link className="con-atras" href="/" aria-label="Volver a las piezas">
           ‹
         </Link>
-        <span className="con-avatar" aria-hidden="true">
-          N
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="con-avatar" src="/porcelana/normita-cara.svg" alt="" width={44} height={44} />
         <div>
           <p className="con-nombre">Norma</p>
           <p className="con-estado">la ceramista · en línea</p>

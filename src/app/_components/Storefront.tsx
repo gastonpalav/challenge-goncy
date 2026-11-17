@@ -13,7 +13,11 @@ export function Storefront({ pieces, consultas = false }: Props) {
     <main className="puesto">
       <header className="puesto-cabecera">
         <div className="puesto-ancho">
-          <h1>La manito de Norma</h1>
+          <div className="puesto-titulo">
+            <h1>La manito de Norma</h1>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="puesto-normita" src="/porcelana/normita.svg" alt="" width={120} height={146} />
+          </div>
           <p>“Lo que se hace con las manos no sale dos veces igual”, dice siempre Norma.</p>
         </div>
       </header>
