@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { handle } from '@/sobrino/handle';
+import { SAMPLE_PHOTOS } from '@/sobrino/samples';
 import { seedSession } from '@/sobrino/seed';
 import type { Intent, Message, Reply, Session } from '@/sobrino/types';
 
@@ -254,13 +255,18 @@ describe('lo demás', () => {
 });
 
 describe('muestra', () => {
-  test('tiene 11 piezas con ids únicos, sin las que agregan los audios grabados', () => {
+  test('tiene 9 piezas con ids únicos, sin las que agregan los audios grabados', () => {
     const { catalog } = seedSession();
     const ids = catalog.map((p) => p.id);
-    expect(ids).toHaveLength(11);
-    expect(new Set(ids).size).toBe(11);
+    expect(ids).toHaveLength(9);
+    expect(new Set(ids).size).toBe(9);
     expect(ids).toEqual(expect.arrayContaining(['taza-marron', 'cuenco', 'maceta']));
     expect(ids).not.toContain('azucarera-azul');
     expect(ids).not.toContain('mate-verde');
+  });
+
+  test('ninguna foto para mandar es de una pieza que ya está publicada', () => {
+    const images = seedSession().catalog.map((p) => p.image);
+    for (const sample of SAMPLE_PHOTOS) expect(images).not.toContain(sample.image);
   });
 });

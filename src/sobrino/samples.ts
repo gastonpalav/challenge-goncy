@@ -4,6 +4,5 @@
  */
 export const SAMPLE_PHOTOS: { id: string; image: string }[] = [
   { id: 'yerbera', image: '/muestra/yerbera.webp' },
-  { id: 'plato-playo', image: '/muestra/plato-playo.webp' },
   { id: 'jarrito', image: '/muestra/jarrito.webp' },
 ];

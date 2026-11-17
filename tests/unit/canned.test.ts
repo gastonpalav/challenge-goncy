@@ -61,7 +61,7 @@ describe('audios grabados', () => {
 
   test('cambiar la foto de la maceta reemplaza la imagen sin agregar piezas', () => {
     const s = play(seedSession(), 'foto-maceta');
-    expect(s.catalog).toHaveLength(11);
+    expect(s.catalog).toHaveLength(9);
     expect(s.catalog.find((p) => p.id === 'maceta')!.image).toBe('/muestra/maceta-nueva.webp');
     expect(ids(s)).not.toContain('foto-maceta');
   });

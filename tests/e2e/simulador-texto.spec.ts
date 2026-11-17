@@ -16,7 +16,7 @@ async function escribir(page: Page, texto: string) {
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/simulador');
-  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
 });
 
 test('escribir que vendió una pieza: confirma y la saca', async ({ page }) => {
@@ -64,7 +64,7 @@ test('no se puede enviar vacío y el texto tiene tope de 300 caracteres', async 
 test('algo que no se entiende no rompe ni cambia la página', async ({ page }) => {
   await escribir(page, 'asdf qwerty');
   await expect(chat(page).getByText(/no te entendí/i)).toBeVisible();
-  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
 });
 
 test('con el cupo agotado avisa, y los audios grabados siguen andando', async ({ page }) => {
@@ -75,7 +75,7 @@ test('con el cupo agotado avisa, y los audios grabados siguen andando', async ({
   }
   await escribir(page, 'vendí el cuenco');
   await expect(chat(page).getByText(/me quedé sin crédito/i)).toBeVisible();
-  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
 
   await page.getByRole('button', { name: /azucarera/i }).click();
   await expect(copia(page).getByText('$ 18.000')).toBeVisible();
@@ -85,13 +85,13 @@ test('mandar una foto de muestra y después decir nombre y precio la publica', a
   await page.getByRole('button', { name: 'Mandar una foto' }).click();
   await page.getByRole('button', { name: /foto de muestra 1/i }).click();
   await expect(chat(page).getByText(/cómo se llama y cuánto sale/i)).toBeVisible();
-  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
 
   await escribir(page, 'yerbera, 30000');
   await expect(chat(page).getByText(/ya está en la página/i)).toBeVisible();
   await expect(copia(page).getByRole('heading', { name: 'Yerbera' })).toBeVisible();
   await expect(copia(page).getByText('$ 30.000')).toBeVisible();
-  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(10);
 });
 
 test('mandar una foto y decir que es la nueva de una pieza la reemplaza', async ({ page }) => {
@@ -102,5 +102,5 @@ test('mandar una foto y decir que es la nueva de una pieza la reemplaza', async 
   await escribir(page, 'es la foto nueva del florero');
   await expect(chat(page).getByText(/cambié la foto/i)).toBeVisible();
   await expect(foto).not.toHaveAttribute('src', antes!);
-  await expect(copia(page).getByRole('listitem')).toHaveCount(8);
+  await expect(copia(page).getByRole('listitem')).toHaveCount(9);
 });
