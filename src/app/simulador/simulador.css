@@ -462,6 +462,31 @@
     border-right: 0;
   }
 
+  /* Los audios van en una fila que se desliza: así el chat conserva la mayor parte del alto. */
+  .sim-entrada {
+    max-height: none;
+    overflow: visible;
+    padding: 8px 0 10px;
+  }
+
+  .sim-entrada-titulo {
+    margin: 0 12px 6px;
+  }
+
+  .sim-chips {
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    overflow-x: auto;
+    padding: 0 12px 4px;
+    scroll-padding-inline: 12px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .sim-chips li {
+    display: flex;
+    scroll-snap-align: start;
+  }
+
   .sim[data-tab='chat'] .sim-pagina,
   .sim[data-tab='pagina'] .sim-chat {
     display: none;
