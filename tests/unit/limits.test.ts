@@ -6,7 +6,7 @@ describe('cupos', () => {
   test('los valores son los acordados', () => {
     expect(LIMITS).toEqual({
       text: { visitor: 30, global: 2000 },
-      audio: { visitor: 5, global: 300 },
+      audio: { visitor: 30, global: 1500 },
       upload: { visitor: 3, global: 200 },
     });
   });
@@ -25,7 +25,7 @@ describe('cupos', () => {
 
   test('cada tipo tiene su cupo', async () => {
     const store = new MemoryStore();
-    for (let i = 0; i < 5; i += 1) expect(await take(store, 'ana', 'audio')).toBe(true);
+    for (let i = 0; i < 30; i += 1) expect(await take(store, 'ana', 'audio')).toBe(true);
     expect(await take(store, 'ana', 'audio')).toBe(false);
     expect(await take(store, 'ana', 'text')).toBe(true);
     for (let i = 0; i < 3; i += 1) expect(await take(store, 'ana', 'upload')).toBe(true);

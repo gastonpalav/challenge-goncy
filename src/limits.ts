@@ -8,7 +8,7 @@ type Limit = { visitor: number; global: number };
 /** Cupos por día: por visitante y para todos los visitantes juntos. */
 export const LIMITS: Record<Kind, Limit> = {
   text: { visitor: 30, global: 2000 },
-  audio: { visitor: 5, global: 300 },
+  audio: { visitor: 30, global: 1500 },
   upload: { visitor: 3, global: 200 },
 };
 

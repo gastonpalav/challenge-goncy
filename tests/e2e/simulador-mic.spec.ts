@@ -51,9 +51,9 @@ test.describe('sin permiso de micrófono', () => {
 });
 
 test.describe('límites del audio', () => {
-  test('el sexto audio del día se rechaza con aviso', async ({ request }) => {
+  test('pasado el cupo de audios del día se rechaza con aviso', async ({ request }) => {
     let last = '';
-    for (let i = 0; i < 6; i += 1) {
+    for (let i = 0; i < 31; i += 1) {
       const res = await request.post('/api/sim/message', { multipart: { kind: 'audio', file: audioFalso } });
       expect(res.ok()).toBe(true);
       last = JSON.stringify(await res.json());
