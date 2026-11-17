@@ -183,6 +183,29 @@ img {
   text-wrap: balance;
 }
 
+/* En la página pública la pieza entera se toca para escribirle a Norma. */
+.pieza-enlace {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pieza-enlace:focus-visible {
+  outline: 3px solid var(--barro);
+  outline-offset: 6px;
+}
+
+.pieza-escribir {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 20px;
+  background: #fff;
+  border: 3px solid var(--cobalto);
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--cobalto-hondo);
+}
+
 /* La base de la pieza: en la porcelana, quien la hizo deja su marca pintada en cobalto. */
 .puesto-pie {
   margin-top: auto;

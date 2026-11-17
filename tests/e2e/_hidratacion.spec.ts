@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-for (const ruta of ['/', '/simulador']) {
+for (const ruta of ['/', '/simulador', '/consulta/taza-marron']) {
   test(`sin errores de consola ni de hidratación en ${ruta}`, async ({ page }) => {
     const errores: string[] = [];
     page.on('console', (m) => {

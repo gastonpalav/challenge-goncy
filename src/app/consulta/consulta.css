@@ -1,0 +1,295 @@
+/* La consulta: quien quiere una pieza dice su nombre y ve una muestra del chat con Norma. */
+
+.con-entrada,
+.con-chat {
+  --verde: #1f5c4d;
+  --verde-claro: #d9f0c9;
+  --fondo-chat: #ece4d8;
+}
+
+.con-entrada a:focus-visible,
+.con-entrada button:focus-visible,
+.con-entrada input:focus-visible,
+.con-chat a:focus-visible,
+.con-chat button:focus-visible {
+  outline: 3px solid var(--barro);
+  outline-offset: 2px;
+}
+
+.con-volver {
+  display: inline-block;
+  padding: 6px 0;
+  font-weight: 700;
+  color: var(--cobalto-hondo);
+}
+
+/* ---------- Primero, el nombre ---------- */
+
+.con-entrada {
+  width: 100%;
+  max-width: 560px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 18px 16px 40px;
+}
+
+.con-entrada h1 {
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--cobalto-hondo);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.con-pieza {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.con-pieza > div {
+  min-width: 0;
+}
+
+.con-pieza img {
+  flex: none;
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid #fff;
+  border-radius: 2px;
+  background: #e6ecf6;
+  box-shadow: 0 0 0 2px var(--cobalto);
+}
+
+.con-precio {
+  margin-top: 8px;
+  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.con-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.con-form label {
+  font-weight: 700;
+}
+
+.con-form input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #fff;
+  border: 3px solid var(--tinta);
+  border-radius: 6px;
+  font: inherit;
+  color: var(--tinta);
+}
+
+.con-form input[aria-invalid='true'] {
+  border-color: var(--barro);
+}
+
+.con-falta {
+  font-weight: 700;
+  color: var(--barro);
+}
+
+.con-form button {
+  padding: 14px 20px;
+  background: var(--cobalto);
+  border: 3px solid var(--cobalto-hondo);
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+
+.con-nohay {
+  margin: 14px 0 20px;
+}
+
+/* ---------- Después, el chat ---------- */
+
+.con-chat {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  height: 100dvh;
+  margin: 0 auto;
+  background: var(--fondo-chat);
+}
+
+.con-contacto {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--verde);
+  color: #fff;
+}
+
+.con-atras {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: -8px;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+}
+
+.con-avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f3ead9;
+  color: var(--verde);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.con-nombre {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.con-estado {
+  opacity: 0.9;
+}
+
+.con-aviso {
+  flex: none;
+  padding: 8px 14px;
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.con-mensajes {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 12px;
+}
+
+.con-burbuja {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 0 rgb(29 26 23 / 0.15);
+  overflow-wrap: anywhere;
+}
+
+.con-burbuja-norma {
+  align-self: flex-start;
+  background: #fff;
+  border-top-left-radius: 2px;
+}
+
+.con-burbuja-yo {
+  align-self: flex-end;
+  background: var(--verde-claro);
+  border-top-right-radius: 2px;
+}
+
+.con-foto {
+  width: 160px;
+  height: 200px;
+  margin-bottom: 8px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.con-voz-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  margin-bottom: 6px;
+}
+
+.con-voz-boton {
+  flex: none;
+  padding: 6px 16px;
+  background: #fff;
+  border: 2px solid var(--verde);
+  border-radius: 20px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--verde);
+  cursor: pointer;
+}
+
+/* Dibujo de la onda del audio. */
+.con-onda {
+  flex: 1;
+  height: 18px;
+  background: repeating-linear-gradient(90deg, var(--verde) 0 3px, transparent 3px 7px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0 20%, #000 20% 80%, transparent 80%);
+  mask-image: linear-gradient(180deg, transparent 0 20%, #000 20% 80%, transparent 80%);
+  opacity: 0.55;
+}
+
+.con-voz-texto {
+  font-style: italic;
+}
+
+.con-grabando {
+  align-self: flex-start;
+  color: var(--tinta-suave);
+}
+
+.con-preguntas {
+  flex: none;
+  padding: 12px 12px 14px;
+  background: #f6f1e8;
+  border-top: 2px solid var(--tinta);
+}
+
+.con-preguntas-titulo {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.con-preguntas ul {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.con-preguntas button {
+  width: 100%;
+  padding: 10px 16px;
+  background: #fff;
+  border: 2px solid var(--verde);
+  border-radius: 20px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--verde);
+  text-align: left;
+  cursor: pointer;
+}
+
+.con-preguntas button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}

@@ -6,5 +6,5 @@ export const revalidate = 300;
 
 export default async function Page() {
   const session = await loadOrSeed(getStore(), REAL);
-  return <Storefront pieces={session.catalog} />;
+  return <Storefront pieces={session.catalog} consultas />;
 }
