@@ -25,6 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # Next genera los tipos de rutas y layouts; en un checkout limpio todavía no existen.
+      - run: npx next typegen
       - run: npx tsc --noEmit
       - run: npm test
       - run: npm run build
