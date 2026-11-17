@@ -79,7 +79,14 @@ img {
 
 .puesto-cabecera p {
   margin-top: 14px;
-  max-width: 26em;
+  max-width: 17em;
+  /* Lo que dice Norma va con su letra, en el cobalto con que pinta. */
+  font-family: var(--letra-mano), "Segoe Print", cursive;
+  font-weight: 600;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--cobalto);
+  text-wrap: balance;
 }
 
 /* La cenefa pintada, como la del borde de un plato. */
@@ -94,8 +101,9 @@ img {
   margin-bottom: 52px;
 }
 
+/* La página termina en la cenefa, como el borde del plato. */
 .cenefa-abajo {
-  margin-top: 76px;
+  margin-top: 40px;
 }
 
 .grilla {
@@ -134,42 +142,53 @@ img {
   box-shadow: 0 0 0 2px var(--cobalto);
 }
 
-/* El cartelito de feria: papel, marcador grueso y apenas torcido. */
+/* El precio va en un azulejito esmaltado: blanco, con filete y ramitas pintadas en cobalto. */
 .cartelito {
   position: absolute;
   right: 8px;
-  bottom: -16px;
+  bottom: -18px;
   max-width: calc(100% - 16px);
-  padding: 2px 14px 4px;
-  background: var(--papel-claro);
-  border: 3px solid var(--tinta);
-  border-radius: 3px;
-  box-shadow: 3px 4px 0 rgb(29 26 23 / 0.18);
-  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
+  display: flex;
+  align-items: center;
+  gap: 0.22em;
+  padding: 0.16em 0.3em 0.2em;
+  background: linear-gradient(170deg, #fff 55%, #eef3fc);
+  border: 2.5px solid var(--cobalto);
+  border-radius: 7px;
+  /* Filete fino por dentro, el canto del azulejo abajo y su sombra sobre la mesa. */
+  box-shadow:
+    inset 0 0 0 3px #fff,
+    inset 0 0 0 4.5px var(--aguada),
+    0 4px 0 var(--cobalto-hondo),
+    0 9px 14px rgb(20 48 111 / 0.28);
+  font-family: var(--letra-cartel), Georgia, serif;
   font-size: clamp(1.7rem, 8.5cqi, 2.1rem);
   line-height: 1.2;
+  color: var(--cobalto-hondo);
   white-space: nowrap;
-  transform: rotate(-4deg);
+  transform: rotate(-1.5deg);
 }
 
-/* Una florcita pintada en la esquina del cartel, la misma de la cenefa. */
-.cartelito::before {
+/* Una ramita a cada lado del número, de la misma mano que la cenefa. */
+.cartelito::before,
+.cartelito::after {
   content: "";
-  position: absolute;
-  top: -31px;
-  left: -27px;
-  width: 48px;
-  height: 48px;
-  background: url("/porcelana/flor.svg") center / contain no-repeat;
-  transform: rotate(-10deg);
+  flex: none;
+  width: 0.78em;
+  height: 1.04em;
+  background: url("/porcelana/ramita.svg") center / contain no-repeat;
+}
+
+.cartelito::after {
+  transform: scaleX(-1);
 }
 
 .pieza:nth-child(3n + 2) .cartelito {
-  transform: rotate(3deg);
+  transform: rotate(1.5deg);
 }
 
 .pieza:nth-child(3n) .cartelito {
-  transform: rotate(-2deg);
+  transform: rotate(-0.5deg);
 }
 
 .pieza-titulo {
@@ -183,9 +202,15 @@ img {
   text-wrap: balance;
 }
 
+.pieza-enlace .pieza-titulo {
+  margin-bottom: 14px;
+}
+
 /* En la página pública la pieza entera se toca para escribirle a Norma. */
 .pieza-enlace {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   color: inherit;
   text-decoration: none;
 }
@@ -195,44 +220,64 @@ img {
   outline-offset: 6px;
 }
 
+/* El botón ocupa el ancho del marco de la foto y, en una misma fila, todos quedan a la misma altura. */
 .pieza-escribir {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 8px 20px;
-  background: #fff;
-  border: 3px solid var(--cobalto);
-  border-radius: 999px;
+  display: block;
+  margin: auto -2px 4px;
+  padding: 10px 20px;
+  text-align: center;
+  /* Azulejo cobalto lleno: el mismo botón que después aparece en la consulta. */
+  background: var(--cobalto);
+  border: 3px solid var(--cobalto-hondo);
+  border-radius: 7px;
+  /* Filete claro por dentro, como el del azulejo del precio pero en negativo. */
+  box-shadow:
+    inset 0 0 0 3px var(--cobalto),
+    inset 0 0 0 4.5px var(--aguada),
+    0 4px 0 var(--cobalto-hondo);
   font-weight: 700;
-  color: var(--cobalto-hondo);
+  color: #fff;
 }
 
 /* La base de la pieza: en la porcelana, quien la hizo deja su marca pintada en cobalto. */
 .puesto-pie {
   margin-top: auto;
-  background: var(--porcelana);
+  padding-bottom: 12px;
 }
 
 .puesto-pie .puesto-ancho {
-  padding-top: 36px;
-  padding-bottom: 48px;
+  padding-top: 72px;
+  text-align: center;
 }
 
-.puesto-marca {
-  display: inline-block;
-  padding: 6px 16px 8px;
-  border: 3px solid var(--cobalto);
-  outline: 1.5px solid var(--cobalto);
-  outline-offset: 3px;
-  margin: 5px;
-  font-family: var(--letra-cartel), Georgia, serif;
+/* Una florcita suelta separa las piezas de la despedida. */
+.puesto-pie .puesto-ancho::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 14px;
+  background: url("/porcelana/flor.svg") center / contain no-repeat;
+}
+
+.puesto-despedida {
+  max-width: 15em;
+  margin: 0 auto;
+  font-family: var(--letra-mano), "Segoe Print", cursive;
+  font-weight: 600;
   font-size: 1.9rem;
-  line-height: 1;
-  color: var(--cobalto-hondo);
+  line-height: 1.1;
+  color: var(--cobalto);
+  text-wrap: balance;
 }
 
-.puesto-pie p + p {
-  margin-top: 16px;
-  max-width: 24em;
+/* La firma, como la que va pintada en la base de cada pieza. */
+.puesto-marca {
+  margin-top: 10px;
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-size: 2.1rem;
+  line-height: 1.1;
+  color: var(--cobalto-hondo);
 }
 
 .taller {
@@ -248,7 +293,8 @@ img {
 
 .taller-titulo {
   margin-bottom: 8px;
-  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
-  font-size: 1.9rem;
-  line-height: 1.15;
+  font-family: var(--letra-mano), "Segoe Print", cursive;
+  font-weight: 700;
+  font-size: 2.3rem;
+  line-height: 1.05;
 }

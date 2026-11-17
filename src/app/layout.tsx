@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Atkinson_Hyperlegible,
   Caprasimo,
-  Permanent_Marker,
+  Caveat,
 } from "next/font/google";
 import "./globals.css";
 
@@ -12,17 +12,17 @@ const texto = Atkinson_Hyperlegible({
   subsets: ["latin"],
   variable: "--letra-texto",
 });
-// Caprasimo: letra gruesa y redondeada para el cartel y los nombres de las piezas.
+// Caprasimo: letra gruesa y redondeada para el cartel, los nombres de las piezas y los precios.
 const cartel = Caprasimo({
   weight: "400",
   subsets: ["latin"],
   variable: "--letra-cartel",
 });
-// Trazo de marcador para el cartelito, hasta que llegue la letra escrita a mano.
-const marcador = Permanent_Marker({
-  weight: "400",
+// Caveat: letra escrita a mano para lo que dice Norma (su refrán, la despedida, el cartel del taller).
+const mano = Caveat({
+  weight: ["600", "700"],
   subsets: ["latin"],
-  variable: "--letra-marcador",
+  variable: "--letra-mano",
 });
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es-AR"
-      className={`${texto.variable} ${cartel.variable} ${marcador.variable}`}
+      className={`${texto.variable} ${cartel.variable} ${mano.variable}`}
     >
       <body>{children}</body>
     </html>

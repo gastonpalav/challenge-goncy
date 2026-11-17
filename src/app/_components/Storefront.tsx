@@ -7,18 +7,14 @@ type Props = {
   consultas?: boolean;
 };
 
-/** La página de Norma completa: cartel, aviso, grilla y la marca al pie. */
+/** La página de Norma completa: cartel, su refrán, grilla y la firma al pie. */
 export function Storefront({ pieces, consultas = false }: Props) {
   return (
     <main className="puesto">
       <header className="puesto-cabecera">
         <div className="puesto-ancho">
           <h1>La manito de Norma</h1>
-          <p>
-            {consultas
-              ? "Cerámicas hechas a mano. Si te gusta alguna, tocala y escribile a Norma."
-              : "Cerámicas hechas a mano. Si te gusta alguna, mandale un mensaje a Norma."}
-          </p>
+          <p>“Lo que se hace con las manos no sale dos veces igual”, dice siempre Norma.</p>
         </div>
       </header>
       <div className="cenefa cenefa-arriba" />
@@ -26,11 +22,11 @@ export function Storefront({ pieces, consultas = false }: Props) {
         <Grid pieces={pieces} consultas={consultas} />
       </div>
       <footer className="puesto-pie">
-        <div className="cenefa cenefa-abajo" />
         <div className="puesto-ancho">
+          <p className="puesto-despedida">Vuelvan pronto, que siempre hay algo saliendo del horno.</p>
           <p className="puesto-marca">Norma</p>
-          <p>Cada pieza es única. Cuando se vende, no hay otra igual.</p>
         </div>
+        <div className="cenefa cenefa-abajo" />
       </footer>
     </main>
   );

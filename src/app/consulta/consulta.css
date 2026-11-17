@@ -67,9 +67,10 @@
 
 .con-precio {
   margin-top: 8px;
-  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
-  font-size: 1.8rem;
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-size: 1.7rem;
   line-height: 1.2;
+  color: var(--cobalto);
 }
 
 .con-form {
