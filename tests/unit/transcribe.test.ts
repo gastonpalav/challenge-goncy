@@ -23,6 +23,23 @@ describe('transcribe', () => {
     expect(seen!.auth).toBe('Bearer clave');
   });
 
+  const answering = (body: unknown): typeof fetch => async () => Response.json(body);
+  const hear = (body: unknown) => transcribe(audio, { fetch: answering(body), apiKey: 'clave' });
+
+  test('lo que el servicio inventa con silencio o ruido vuelve vacío', async () => {
+    expect(await hear({ text: ' Gracias.', segments: [{ avg_logprob: -0.3 }] })).toBe('');
+    expect(await hear({ text: ' ...', segments: [{ avg_logprob: -0.62 }] })).toBe('');
+    expect(await hear({ text: ' Subtítulos realizados por la comunidad de Amara.org' })).toBe('');
+    expect(await hear({ text: ' La ciudad de México', segments: [{ avg_logprob: -1.39 }] })).toBe('');
+  });
+
+  test('una frase de verdad pasa aunque sea corta o agradezca', async () => {
+    expect(await hear({ text: ' Sí.', segments: [{ avg_logprob: -0.33 }] })).toBe('Sí.');
+    expect(await hear({ text: ' Gracias, nene, vendí el cuenco.', segments: [{ avg_logprob: -0.2 }] })).toBe(
+      'Gracias, nene, vendí el cuenco.',
+    );
+  });
+
   test('si el servicio falla, lanza un error', async () => {
     const fakeFetch: typeof fetch = async () => new Response('nope', { status: 500 });
     await expect(transcribe(audio, { fetch: fakeFetch, apiKey: 'clave' })).rejects.toThrow();
