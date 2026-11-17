@@ -1,8 +1,14 @@
 :root {
+  /* Porcelana azul y blanca: fondo blanco frío y todo lo pintado en cobalto, como bajo esmalte. */
+  --porcelana: #fbfcfe;
+  --cobalto: #1f48a3;
+  --cobalto-hondo: #14306f;
+  --aguada: #a9c0ea;
+
   --papel: #f3ead9;
   --papel-claro: #fffdf6;
-  --tinta: #1d1a17;
-  --tinta-suave: #4a4037;
+  --tinta: #0f1c40;
+  --tinta-suave: #33416b;
   --barro: #a8452f;
   color-scheme: light;
 }
@@ -19,7 +25,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--papel);
+  background: var(--porcelana);
   color: var(--tinta);
   font-family: var(--letra-texto), Verdana, sans-serif;
   /* 20 px con la configuración normal; crece si la persona agranda la letra del teléfono. */
@@ -43,25 +49,53 @@ img {
 
 .puesto {
   container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  /* Ramas en aguada muy clara: están, pero no compiten con lo que hay que leer. */
+  background: var(--porcelana) url("/porcelana/ramas.svg") 50% 0 / 820px auto;
+}
+
+.puesto-ancho {
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 28px 16px 72px;
+  padding: 0 16px;
 }
 
 .puesto-cabecera {
-  margin-bottom: 36px;
+  padding: 30px 0 24px;
+  background: var(--porcelana);
 }
 
 .puesto-cabecera h1 {
-  font-size: clamp(2.1rem, 9cqi, 3.2rem);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 11.5cqi, 4.4rem);
+  line-height: 1;
+  color: var(--cobalto-hondo);
+  text-wrap: balance;
 }
 
 .puesto-cabecera p {
-  margin-top: 12px;
-  max-width: 28em;
-  color: var(--tinta-suave);
+  margin-top: 14px;
+  max-width: 26em;
+}
+
+/* La cenefa pintada, como la del borde de un plato. */
+.cenefa {
+  flex: none;
+  height: clamp(72px, 16cqi, 120px);
+  background: var(--porcelana) url("/porcelana/cenefa.svg") repeat-x 50% 0 /
+    auto 100%;
+}
+
+.cenefa-arriba {
+  margin-bottom: 52px;
+}
+
+.cenefa-abajo {
+  margin-top: 76px;
 }
 
 .grilla {
@@ -70,7 +104,7 @@ img {
   padding: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 44px 28px;
+  gap: 48px 28px;
 }
 
 @container (min-width: 560px) {
@@ -89,12 +123,15 @@ img {
   position: relative;
 }
 
+/* La foto como un azulejo: borde blanco y filete cobalto. */
 .pieza-foto img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 6px;
-  background: #e3d9c6;
+  border: 7px solid #fff;
+  border-radius: 2px;
+  background: #e6ecf6;
+  box-shadow: 0 0 0 2px var(--cobalto);
 }
 
 /* El cartelito de feria: papel, marcador grueso y apenas torcido. */
@@ -108,11 +145,23 @@ img {
   border: 3px solid var(--tinta);
   border-radius: 3px;
   box-shadow: 3px 4px 0 rgb(29 26 23 / 0.18);
-  font-family: var(--letra-marcador), 'Comic Sans MS', cursive;
+  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
   font-size: clamp(1.7rem, 8.5cqi, 2.1rem);
   line-height: 1.2;
   white-space: nowrap;
   transform: rotate(-4deg);
+}
+
+/* Una florcita pintada en la esquina del cartel, la misma de la cenefa. */
+.cartelito::before {
+  content: "";
+  position: absolute;
+  top: -31px;
+  left: -27px;
+  width: 48px;
+  height: 48px;
+  background: url("/porcelana/flor.svg") center / contain no-repeat;
+  transform: rotate(-10deg);
 }
 
 .pieza:nth-child(3n + 2) .cartelito {
@@ -125,15 +174,47 @@ img {
 
 .pieza-titulo {
   margin-top: 28px;
-  font-size: 1.6rem;
-  line-height: 1.15;
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: var(--cobalto-hondo);
   overflow-wrap: anywhere;
   text-wrap: balance;
 }
 
+/* La base de la pieza: en la porcelana, quien la hizo deja su marca pintada en cobalto. */
+.puesto-pie {
+  margin-top: auto;
+  background: var(--porcelana);
+}
+
+.puesto-pie .puesto-ancho {
+  padding-top: 36px;
+  padding-bottom: 48px;
+}
+
+.puesto-marca {
+  display: inline-block;
+  padding: 6px 16px 8px;
+  border: 3px solid var(--cobalto);
+  outline: 1.5px solid var(--cobalto);
+  outline-offset: 3px;
+  margin: 5px;
+  font-family: var(--letra-cartel), Georgia, serif;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--cobalto-hondo);
+}
+
+.puesto-pie p + p {
+  margin-top: 16px;
+  max-width: 24em;
+}
+
 .taller {
   max-width: 22em;
-  margin: 12vh auto 0;
+  margin: 4vh auto 0;
   padding: 28px 24px;
   background: var(--papel-claro);
   border: 3px solid var(--tinta);
@@ -144,7 +225,7 @@ img {
 
 .taller-titulo {
   margin-bottom: 8px;
-  font-family: var(--letra-marcador), 'Comic Sans MS', cursive;
+  font-family: var(--letra-marcador), "Comic Sans MS", cursive;
   font-size: 1.9rem;
   line-height: 1.15;
 }

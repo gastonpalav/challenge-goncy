@@ -254,11 +254,11 @@ describe('lo demás', () => {
 });
 
 describe('muestra', () => {
-  test('tiene 8 piezas con ids únicos, sin las que agregan los audios grabados', () => {
+  test('tiene 11 piezas con ids únicos, sin las que agregan los audios grabados', () => {
     const { catalog } = seedSession();
     const ids = catalog.map((p) => p.id);
-    expect(ids).toHaveLength(8);
-    expect(new Set(ids).size).toBe(8);
+    expect(ids).toHaveLength(11);
+    expect(new Set(ids).size).toBe(11);
     expect(ids).toEqual(expect.arrayContaining(['taza-marron', 'cuenco', 'maceta']));
     expect(ids).not.toContain('azucarera-azul');
     expect(ids).not.toContain('mate-verde');

@@ -16,7 +16,7 @@ describe('MemoryStore', () => {
     const leida = await store.getSession('x');
     expect(leida).toEqual(s);
     leida!.catalog.pop();
-    expect((await store.getSession('x'))!.catalog).toHaveLength(8);
+    expect((await store.getSession('x'))!.catalog).toHaveLength(11);
   });
 
   test('una sesión vencida deja de existir', async () => {
@@ -41,7 +41,7 @@ describe('loadOrSeed', () => {
   test('sin sesión devuelve la muestra y la deja guardada', async () => {
     const store = new MemoryStore();
     const s = await loadOrSeed(store, 'real');
-    expect(s.catalog).toHaveLength(8);
+    expect(s.catalog).toHaveLength(11);
     expect(await store.getSession('real')).toEqual(s);
   });
 

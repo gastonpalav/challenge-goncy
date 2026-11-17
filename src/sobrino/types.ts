@@ -39,4 +39,6 @@ export type Session = {
   pending?: Pending;
   /** Catálogo anterior al último cambio, para deshacer. */
   previous?: Piece[];
+  /** Cuándo avisó por última vez que estaba en vivo. */
+  liveNoteAt?: number;
 };

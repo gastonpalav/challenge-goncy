@@ -7,8 +7,8 @@ export type ChatItem = {
   from: 'norma' | 'goncy';
   text?: string;
   image?: string;
-  /** Un audio: lo que dice y, si ya está grabado, el archivo. */
-  voice?: { text: string; src?: string };
+  /** Un audio: lo que dice (si ya se sabe) y, si está grabado, el archivo. */
+  voice?: { text?: string; src?: string };
   buttons?: string[];
 };
 
@@ -75,7 +75,7 @@ function Voice({ voice }: { voice: NonNullable<ChatItem['voice']> }) {
         )}
         <span className="sim-onda" aria-hidden="true" />
       </div>
-      <p className="sim-voz-texto">“{voice.text}”</p>
+      {voice.text ? <p className="sim-voz-texto">“{voice.text}”</p> : null}
     </div>
   );
 }

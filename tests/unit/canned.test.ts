@@ -13,6 +13,13 @@ function play(session: Session, id: string): Session {
 const tapYes = (s: Session) => handle(s, { kind: 'button', label: 'Sí' }, 1).session;
 
 describe('audios grabados', () => {
+  test('no se olvida de que ya avisó que estaba en vivo', () => {
+    const session = { ...seedSession(), liveNoteAt: 123, pendingPhoto: '/f/x.webp' };
+    const after = play(session, 'ravioles');
+    expect(after.liveNoteAt).toBe(123);
+    expect(after.pendingPhoto).toBeUndefined();
+  });
+
   test('son siete y cada uno tiene texto para leer', () => {
     expect(CANNED).toHaveLength(7);
     expect(CANNED.every((c) => c.label.length > 10)).toBe(true);
@@ -54,7 +61,7 @@ describe('audios grabados', () => {
 
   test('cambiar la foto de la maceta reemplaza la imagen sin agregar piezas', () => {
     const s = play(seedSession(), 'foto-maceta');
-    expect(s.catalog).toHaveLength(8);
+    expect(s.catalog).toHaveLength(11);
     expect(s.catalog.find((p) => p.id === 'maceta')!.image).toBe('/muestra/maceta-nueva.webp');
     expect(ids(s)).not.toContain('foto-maceta');
   });

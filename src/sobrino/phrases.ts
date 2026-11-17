@@ -43,6 +43,8 @@ export const smalltalk = () => 'Dale, tía, el domingo paso a verte. ¿Alguna no
 export const notUnderstood = () =>
   'No te entendí, tía. Mandame la foto de una pieza, o decime cuál vendiste o cuál cambió de precio.';
 
+export const liveNote = () => 'Estoy en vivo, tía. Dame un segundo que ya lo hago.';
+
 export const outOfCredit = () =>
   'Tía, por hoy me quedé sin crédito para leer mensajes. Tocá uno de los audios de abajo, que esos me llegan igual.';
 export const micFailed = () => 'No te escuché bien, tía. ¿Me lo escribís o me mandás uno de los audios de abajo?';

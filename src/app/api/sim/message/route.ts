@@ -7,19 +7,24 @@ import { interpret } from '@/sobrino/interpret';
 import { fakeAsker } from '@/sobrino/interpret.fake';
 import * as say from '@/sobrino/phrases';
 import { SAMPLE_PHOTOS } from '@/sobrino/samples';
+import { isLive, withLiveNote } from '@/sobrino/stream';
+import { transcribe } from '@/sobrino/transcribe';
 import type { Message, Reply, Session } from '@/sobrino/types';
 import { getStore, loadOrSeed } from '@/store';
 
 const MAX_TEXT = 300;
+/** Diez segundos de audio comprimido entran cómodos en 500 KB. */
+const MAX_AUDIO_BYTES = 500_000;
 const E2E = process.env.E2E === '1';
 
 type Body =
   | { kind: 'canned'; id: string }
   | { kind: 'button'; label: string }
   | { kind: 'text'; text: string }
-  | { kind: 'samplePhoto'; image: string };
+  | { kind: 'samplePhoto'; image: string }
+  | { kind: 'audio'; file: Blob };
 
-type Result = { session: Session; replies: Reply[] };
+type Result = { session: Session; replies: Reply[]; heard?: string };
 
 function parse(raw: unknown): Body | null {
   if (typeof raw !== 'object' || raw === null) return null;
@@ -70,8 +75,44 @@ async function onText(session: Session, text: string, visitor: string, now: numb
   return handle(session, { kind: 'intent', intent }, now);
 }
 
+async function readBody(request: Request): Promise<Body | null> {
+  const type = request.headers.get('content-type') ?? '';
+  if (type.includes('multipart/form-data')) {
+    const form = await request.formData().catch(() => null);
+    const file = form?.get('file');
+    if (form?.get('kind') !== 'audio' || !(file instanceof Blob)) return null;
+    return { kind: 'audio', file };
+  }
+  return parse(await request.json().catch(() => null));
+}
+
+/** Un audio grabado con el micrófono: se pasa a texto y sigue el mismo camino que el texto. */
+async function onAudio(session: Session, file: Blob, visitor: string, now: number): Promise<Result> {
+  const failed: Result = { session, replies: [{ text: say.micFailed() }] };
+  if (file.size === 0 || file.size > MAX_AUDIO_BYTES || !file.type.startsWith('audio/')) return failed;
+
+  const canHear = E2E || Boolean(process.env.GROQ_API_KEY && process.env.ANTHROPIC_API_KEY);
+  if (!canHear || !(await take(getStore(), visitor, 'audio'))) {
+    return { session, replies: [{ text: say.outOfCredit() }] };
+  }
+
+  let heard: string;
+  try {
+    heard = E2E ? 'vendí el cuenco' : await transcribe(file);
+  } catch (error) {
+    console.error('audio: no se pudo transcribir', error);
+    return failed;
+  }
+  if (!heard) return failed;
+
+  const answer = typedAnswer(session, heard);
+  if (answer) return { ...handle(session, answer, now), heard };
+  const intent = await interpret(heard.slice(0, MAX_TEXT), session, E2E ? { ask: fakeAsker } : {});
+  return { ...handle(session, { kind: 'intent', intent }, now), heard };
+}
+
 export async function POST(request: Request) {
-  const body = parse(await request.json().catch(() => null));
+  const body = await readBody(request);
   if (!body) return NextResponse.json({ error: 'Mensaje inválido' }, { status: 400 });
 
   const store = getStore();
@@ -89,11 +130,16 @@ export async function POST(request: Request) {
     result = handle(session, { kind: 'button', label: body.label }, now);
   } else if (body.kind === 'samplePhoto') {
     result = handle(session, { kind: 'photo', image: body.image }, now);
+  } else if (body.kind === 'audio') {
+    result = await onAudio(session, body.file, visitor, now);
   } else {
     result = await onText(session, body.text, visitor, now);
   }
 
+  // En las pruebas no depende de la hora en que se corran.
+  result = withLiveNote(session, result, now, !E2E && isLive(now));
+
   await store.setSession(key, result.session, SIM_TTL);
-  const response: SimResponse = { ...simState(result.session), replies: result.replies };
+  const response: SimResponse = { ...simState(result.session), replies: result.replies, heard: result.heard };
   return NextResponse.json(response);
 }

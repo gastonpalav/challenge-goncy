@@ -35,7 +35,8 @@ export async function ensureVisitor(): Promise<string> {
 export type Chip = { id: string; label: string; audio?: string; photo?: string };
 
 export type SimState = { catalog: Piece[]; chips: Chip[] };
-export type SimResponse = SimState & { replies: Reply[] };
+/** heard: lo que el sobrino entendió de un audio grabado con el micrófono. */
+export type SimResponse = SimState & { replies: Reply[]; heard?: string };
 
 export function simState(session: Session): SimState {
   return {

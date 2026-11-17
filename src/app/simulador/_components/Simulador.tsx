@@ -6,6 +6,7 @@ import * as say from '@/sobrino/phrases';
 import { SAMPLE_PHOTOS } from '@/sobrino/samples';
 import { Storefront } from '../../_components/Storefront';
 import { Bubble, type ChatItem } from './Bubble';
+import { Mic } from './Mic';
 
 type Tab = 'chat' | 'pagina';
 
@@ -40,11 +41,13 @@ export function Simulador({ initial }: { initial: SimState }) {
       setBusy(true);
       setItems((prev) => [...prev, ...mine]);
       try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body ?? {}),
-        });
+        // Un audio viaja como formulario; el navegador le pone el Content-Type con su separador.
+        const res = await fetch(
+          url,
+          body instanceof FormData
+            ? { method: 'POST', body }
+            : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body ?? {}) },
+        );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = (await res.json()) as SimResponse;
         if (JSON.stringify(catalog.current) !== JSON.stringify(data.catalog)) {
@@ -103,6 +106,21 @@ export function Simulador({ initial }: { initial: SimState }) {
       ]),
     );
   };
+
+  const sendAudio = async (audio: Blob) => {
+    const form = new FormData();
+    form.set('kind', 'audio');
+    form.set('file', audio);
+    const mine = item({ from: 'norma', voice: { src: URL.createObjectURL(audio) } });
+    const data = await post('/api/sim/message', form, [mine]);
+    const heard = data?.heard;
+    if (heard) {
+      setItems((prev) => prev.map((it) => (it.id === mine.id ? { ...it, voice: { ...it.voice, text: heard } } : it)));
+    }
+    addReplies(data);
+  };
+
+  const micFailed = () => setItems((prev) => [...prev, item({ from: 'goncy', text: say.micFailed() })]);
 
   const reset = async () => {
     const data = await post('/api/sim/reset', {}, []);
@@ -203,6 +221,7 @@ export function Simulador({ initial }: { initial: SimState }) {
             >
               Mandar una foto
             </button>
+            <Mic disabled={busy} onAudio={sendAudio} onFail={micFailed} />
             <input
               type="text"
               aria-label="Escribile a Goncy"

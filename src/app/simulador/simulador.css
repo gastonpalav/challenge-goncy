@@ -268,9 +268,11 @@
   opacity: 0.55;
 }
 
+/* Dos renglones: arriba foto y micrófono, abajo el campo para escribir. */
 .sim-escribir {
   flex: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 10px 12px;
   background: #f6f1e8;
@@ -278,7 +280,7 @@
 }
 
 .sim-escribir input {
-  flex: 1;
+  flex: 1 1 14em;
   min-width: 0;
   padding: 10px 14px;
   background: #fff;
@@ -310,13 +312,60 @@
   border-color: #9aa8a2;
 }
 
-.sim-escribir .sim-foto-boton {
-  padding: 10px 12px;
+.sim-escribir .sim-foto-boton,
+.sim-escribir .sim-herramienta {
+  padding: 6px 14px;
   background: #fff;
   color: var(--verde);
   font-size: 0.9rem;
-  line-height: 1.1;
-  max-width: 5.5em;
+}
+
+/* Mientras se graba, la barra de grabación ocupa el lugar de todo lo demás. */
+.sim-escribir:has(.sim-grabando) > :not(.sim-grabando) {
+  display: none;
+}
+
+.sim-grabando {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.sim-grabando [role='status'] {
+  flex: 1;
+  line-height: 1.2;
+}
+
+.sim-grabando-punto {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #b3261e;
+  animation: sim-latido 1s ease-in-out infinite alternate;
+}
+
+@keyframes sim-latido {
+  to {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-grabando-punto {
+    animation: none;
+  }
+}
+
+.sim-escribir .sim-grabando button {
+  padding: 10px 12px;
+}
+
+.sim-escribir .sim-grabando button:not(.sim-grabando-enviar) {
+  background: #fff;
+  color: var(--verde);
 }
 
 .sim-bandeja {
