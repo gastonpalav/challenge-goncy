@@ -6,7 +6,7 @@ import { Simulador } from './_components/Simulador';
 import './simulador.css';
 
 export const metadata: Metadata = {
-  title: 'Hacé de Norma · Cerámicas de Norma',
+  title: 'Hacé de Norma · La manito de Norma',
   description: 'Simulador: actualizá la página de Norma como lo hace ella, hablándole por WhatsApp a su sobrino.',
   robots: { index: false },
 };

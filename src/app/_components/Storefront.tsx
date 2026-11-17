@@ -13,11 +13,11 @@ export function Storefront({ pieces, consultas = false }: Props) {
     <main className="puesto">
       <header className="puesto-cabecera">
         <div className="puesto-ancho">
-          <h1>Cerámicas de Norma</h1>
+          <h1>La manito de Norma</h1>
           <p>
             {consultas
-              ? "Piezas hechas a mano. Si te gusta alguna, tocala y escribile a Norma."
-              : "Piezas hechas a mano. Si te gusta alguna, mandale un mensaje a Norma."}
+              ? "Cerámicas hechas a mano. Si te gusta alguna, tocala y escribile a Norma."
+              : "Cerámicas hechas a mano. Si te gusta alguna, mandale un mensaje a Norma."}
           </p>
         </div>
       </header>

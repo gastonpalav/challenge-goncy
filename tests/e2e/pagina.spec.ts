@@ -7,7 +7,7 @@ const sinDesborde = (page: Page) =>
 
 test('muestra el cartel, las piezas y los precios', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1, name: 'Cerámicas de Norma' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'La manito de Norma' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 2, name: 'Taza marrón' })).toBeVisible();
   await expect(page.getByText('$ 24.000')).toBeVisible();
   await expect(page.getByRole('listitem')).toHaveCount(9);

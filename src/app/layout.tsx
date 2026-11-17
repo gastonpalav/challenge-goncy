@@ -26,7 +26,7 @@ const marcador = Permanent_Marker({
 });
 
 export const metadata: Metadata = {
-  title: "Cerámicas de Norma",
+  title: "La manito de Norma",
   description: "Piezas de cerámica hechas a mano en el taller de Norma.",
 };
 

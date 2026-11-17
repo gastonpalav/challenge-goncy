@@ -5,7 +5,7 @@ import { Consulta } from './_components/Consulta';
 import '../consulta.css';
 
 export const metadata: Metadata = {
-  title: 'Escribile a Norma · Cerámicas de Norma',
+  title: 'Escribile a Norma · La manito de Norma',
   description: 'Muestra de cómo se arregla con Norma cuando te gusta una pieza.',
   robots: { index: false },
 };
