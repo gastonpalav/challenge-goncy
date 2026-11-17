@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
-import { interpret } from '@/sobrino/interpret';
+import { canInterpret, interpret } from '@/sobrino/interpret';
 import { seedSession } from '@/sobrino/seed';
 import type { Session } from '@/sobrino/types';
 
-// Frases reales contra Claude de verdad. Solo corre si hay credenciales: cuesta centavos.
+// Frases reales contra el modelo de verdad (Gemini si está su clave, si no Claude). Solo corre si hay credenciales.
 const session = seedSession();
 const dosTazas: Session = {
   catalog: [
@@ -12,7 +12,7 @@ const dosTazas: Session = {
   ],
 };
 
-describe.skipIf(!process.env.ANTHROPIC_API_KEY)('interpret con Claude', { timeout: 30_000 }, () => {
+describe.skipIf(!canInterpret())('interpret con el modelo real', { timeout: 30_000 }, () => {
   test('vendí la taza marrón', async () => {
     expect(await interpret('vendí la taza marrón', session)).toEqual({ type: 'sold', pieceIds: ['taza-marron'] });
   });

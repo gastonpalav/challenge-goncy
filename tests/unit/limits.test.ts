@@ -5,8 +5,8 @@ import { MemoryStore } from '@/store/memory';
 describe('cupos', () => {
   test('los valores son los acordados', () => {
     expect(LIMITS).toEqual({
-      text: { visitor: 30, global: 2000 },
-      audio: { visitor: 30, global: 1500 },
+      text: { visitor: 30, global: 1000 },
+      audio: { visitor: 30, global: 800 },
       upload: { visitor: 3, global: 200 },
     });
   });

@@ -5,10 +5,13 @@ export type Kind = 'text' | 'audio' | 'upload';
 
 type Limit = { visitor: number; global: number };
 
-/** Cupos por día: por visitante y para todos los visitantes juntos. */
+/**
+ * Cupos por día: por visitante y para todos los visitantes juntos.
+ * Texto y audio suman 1800: quedan por debajo de lo que dan gratis los modelos (unos 2000 por día).
+ */
 export const LIMITS: Record<Kind, Limit> = {
-  text: { visitor: 30, global: 2000 },
-  audio: { visitor: 30, global: 1500 },
+  text: { visitor: 30, global: 1000 },
+  audio: { visitor: 30, global: 800 },
   upload: { visitor: 3, global: 200 },
 };
 

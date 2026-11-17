@@ -3,7 +3,7 @@ import { take } from '@/limits';
 import { ensureVisitor, simKey, simState, SIM_TTL, type SimResponse } from '@/sim/server';
 import { availableCanned, playCanned } from '@/sobrino/canned';
 import { handle } from '@/sobrino/handle';
-import { interpret } from '@/sobrino/interpret';
+import { canInterpret, interpret } from '@/sobrino/interpret';
 import { fakeAsker } from '@/sobrino/interpret.fake';
 import * as say from '@/sobrino/phrases';
 import { SAMPLE_PHOTOS } from '@/sobrino/samples';
@@ -67,8 +67,7 @@ async function onText(session: Session, text: string, visitor: string, now: numb
   const answer = typedAnswer(session, text);
   if (answer) return handle(session, answer, now);
 
-  const canInterpret = E2E || Boolean(process.env.ANTHROPIC_API_KEY);
-  if (!canInterpret || !(await take(getStore(), visitor, 'text'))) {
+  if (!(E2E || canInterpret()) ||!(await take(getStore(), visitor, 'text'))) {
     return { session, replies: [{ text: say.outOfCredit() }] };
   }
   const intent = await interpret(text, session, E2E ? { ask: fakeAsker } : {});
@@ -91,7 +90,7 @@ async function onAudio(session: Session, file: Blob, visitor: string, now: numbe
   const failed: Result = { session, replies: [{ text: say.micFailed() }] };
   if (file.size === 0 || file.size > MAX_AUDIO_BYTES || !file.type.startsWith('audio/')) return failed;
 
-  const canHear = E2E || Boolean(process.env.GROQ_API_KEY && process.env.ANTHROPIC_API_KEY);
+  const canHear = E2E || Boolean(process.env.GROQ_API_KEY && canInterpret());
   if (!canHear || !(await take(getStore(), visitor, 'audio'))) {
     return { session, replies: [{ text: say.outOfCredit() }] };
   }
