@@ -169,13 +169,6 @@
   opacity: 0.9;
 }
 
-.con-aviso {
-  flex: none;
-  padding: 8px 14px;
-  background: var(--tinta);
-  color: var(--papel);
-}
-
 .con-mensajes {
   flex: 1;
   min-height: 0;

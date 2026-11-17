@@ -124,9 +124,6 @@ export function Consulta({ piece }: { piece: Piece }) {
           <p className="con-estado">la ceramista · en línea</p>
         </div>
       </header>
-      <p className="con-aviso">
-        <strong>Esto es una muestra.</strong> En la vida real, Norma te contesta por WhatsApp.
-      </p>
 
       <div className="con-mensajes" aria-live="polite">
         {mensajes.map((m) => (

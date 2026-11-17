@@ -18,7 +18,7 @@ test('sin nombre no arranca el chat', async ({ page }) => {
   await page.goto('/consulta/taza-marron');
   await page.getByRole('button', { name: 'Escribirle a Norma' }).click();
   await expect(page.getByText('Escribí tu nombre para seguir.')).toBeVisible();
-  await expect(page.getByText('Esto es una muestra.')).toHaveCount(0);
+  await expect(page.getByText('la ceramista · en línea')).toHaveCount(0);
 });
 
 test('con el nombre sale el mensaje y Norma contesta cada pregunta', async ({ page }) => {
@@ -26,7 +26,7 @@ test('con el nombre sale el mensaje y Norma contesta cada pregunta', async ({ pa
   await page.getByLabel(/cómo te llamás/).fill('  Marta ');
   await page.getByRole('button', { name: 'Escribirle a Norma' }).click();
 
-  await expect(page.getByText('Esto es una muestra.')).toBeVisible();
+  await expect(page.getByText('la ceramista · en línea')).toBeVisible();
   await expect(page.getByText('Hola, Norma, soy Marta. Me gusta esta pieza de tu página: “Taza marrón”, a $ 24.000. ¿Sigue disponible?')).toBeVisible();
   await expect(page.getByText(/todavía la tengo/)).toBeVisible();
 

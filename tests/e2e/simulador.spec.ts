@@ -115,10 +115,6 @@ test('la página real no cambia con lo que se hace en el simulador', async ({ pa
   await expect(page.getByText('Azucarera azul')).toHaveCount(0);
 });
 
-test('avisa que es una copia y que la página real no cambia', async ({ page }) => {
-  await expect(page.getByText(/la página real no cambia/i)).toBeVisible();
-});
-
 test('en el celular hay pestañas para ir del chat a la página', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await context.newPage();

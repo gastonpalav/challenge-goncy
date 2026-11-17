@@ -25,33 +25,24 @@
   outline-offset: 2px;
 }
 
-.sim-intro {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 20px;
-  border-bottom: 2px solid var(--tinta);
-}
-
-.sim-intro h1 {
-  font-size: 1.5rem;
-  line-height: 1.1;
-}
-
-.sim-intro p {
-  margin-top: 4px;
-  max-width: 46em;
-  font-size: 1rem;
-  color: var(--tinta-suave);
+/* El título queda solo para lectores de pantalla. */
+.sim-titulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .sim-reset {
   flex: none;
-  padding: 8px 14px;
-  background: var(--papel-claro);
-  border: 2px solid var(--tinta);
+  margin-left: auto;
+  padding: 6px 12px;
+  background: transparent;
+  border: 2px solid #fff;
   border-radius: 3px;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
@@ -90,15 +81,11 @@
 }
 
 .sim-avatar {
-  display: grid;
-  place-items: center;
+  flex: none;
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: #f3ead9;
-  color: var(--verde);
-  font-weight: 700;
-  font-size: 1.3rem;
+  object-fit: cover;
 }
 
 .sim-nombre {
@@ -407,14 +394,6 @@
   flex-direction: column;
 }
 
-.sim-aviso {
-  flex: none;
-  padding: 8px 20px;
-  background: var(--tinta);
-  color: var(--papel);
-  font-size: 0.95rem;
-}
-
 .sim-pagina-scroll {
   flex: 1;
   min-height: 0;
@@ -424,14 +403,6 @@
 /* ---------- Celular: una cosa por vez, con pestañas ---------- */
 
 @media (max-width: 859px) {
-  .sim-intro {
-    padding: 10px 14px;
-  }
-
-  .sim-intro p {
-    display: none;
-  }
-
   .sim-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;

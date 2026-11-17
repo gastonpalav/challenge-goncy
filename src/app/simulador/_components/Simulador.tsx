@@ -139,18 +139,7 @@ export function Simulador({ initial }: { initial: SimState }) {
 
   return (
     <div className="sim" data-tab={tab}>
-      <header className="sim-intro">
-        <div>
-          <h1>Hacé de Norma</h1>
-          <p>
-            Norma no tiene compu ni mail. Su página la actualiza mandándole WhatsApp a su sobrino. Tocá uno de sus
-            audios y mirá cómo cambia la página.
-          </p>
-        </div>
-        <button type="button" className="sim-reset" onClick={reset} disabled={busy}>
-          Empezar de nuevo
-        </button>
-      </header>
+      <h1 className="sim-titulo">Hacé de Norma</h1>
 
       <div className="sim-tabs" role="tablist" aria-label="Qué ver">
         <button type="button" role="tab" aria-selected={tab === 'chat'} onClick={() => showTab('chat')}>
@@ -165,13 +154,15 @@ export function Simulador({ initial }: { initial: SimState }) {
       <div className="sim-cuerpo">
         <section className="sim-chat" aria-label="Chat con Goncy">
           <div className="sim-contacto">
-            <span className="sim-avatar" aria-hidden="true">
-              G
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="sim-avatar" src="/abAQIPBF_400x400.jpg" alt="" width={42} height={42} />
             <div>
               <p className="sim-nombre">Goncy</p>
               <p className="sim-estado">el sobrino · en línea</p>
             </div>
+            <button type="button" className="sim-reset" onClick={reset} disabled={busy}>
+              Empezar de nuevo
+            </button>
           </div>
 
           <div className="sim-mensajes" aria-live="polite">
@@ -239,9 +230,6 @@ export function Simulador({ initial }: { initial: SimState }) {
         </section>
 
         <section className="sim-pagina" aria-label="Tu copia de prueba de la página">
-          <p className="sim-aviso">
-            <strong>Tu copia de prueba.</strong> La página real no cambia con lo que hagas acá.
-          </p>
           <div className="sim-pagina-scroll" ref={pageScroll}>
             <Storefront pieces={state.catalog} />
           </div>

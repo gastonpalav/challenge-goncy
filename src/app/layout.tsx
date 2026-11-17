@@ -28,6 +28,8 @@ const mano = Caveat({
 const REFRAN = "Lo que se hace con las manos no sale dos veces igual.";
 
 export const metadata: Metadata = {
+  // Las imágenes del enlace (opengraph-image, twitter-image) salen con esta dirección.
+  metadataBase: new URL("https://la-manito-de-norma.vercel.app"),
   title: "La manito de Norma",
   description: REFRAN,
   // Lo que se ve al pegar el enlace en WhatsApp o en X.
@@ -38,6 +40,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#fbfcfe" };
